@@ -55,4 +55,13 @@ Options:
 - You can manually reconfigure slurm parameters as per your HPC system (e.g memory, CPUs) by going through indivudal scripts in `modules` directory.
 - All the relevent outputs will be stored in `outdir` folder, and outputs for every individual steps in the pipeline can be found in `workdir`.
 
+# Classifiers
+
+Great guide for creating classifiers for Qiime2 by [Asa Jacabsen](https://www.firum.fo/media/3733/pipeline_taxonomic_classifiers.pdf).
+
+Also various projects have perfromed this for you:
+
+- [midori](https://www.reference-midori.info/download.php)
+- [qiime2 data resources](https://docs.qiime2.org/2024.10/data-resources/)
+
 Prof Peter Kille - kille@cardiff.cf.ac.uk

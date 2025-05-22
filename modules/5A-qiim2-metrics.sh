@@ -20,18 +20,16 @@ cat $0
 # Load some modules
 module load ${q2_module}
 
-qiime dada2 denoise-paired \
-  --i-demultiplexed-seqs "${q2_input}/${NAME}_demux.qza" \
-  --p-trim-left-f 20 \
-  --p-trunc-len-f 250 \
-  --p-trim-left-r 20 \
-  --p-trunc-len-r 250 \
-  --p-n-threads ${SLURM_CPUS_PER_TASK} \
-  --p-min-overlap 8 \
-  --o-representative-sequences "${q2_dada2}/${NAME}_asv-seqs.qza" \
-  --o-table "${q2_dada2}/${NAME}_asv-table.qza" \
-  --o-denoising-stats "${q2_dada2}/${NAME}_stats.qza"
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences  "${q2_dada2}/${NAME}_asv-seqs.qza" \
+  --o-alignment "${q2_metric}/${NAME}_aligned-rep-seq.qva" \
+  --o-masked-alignment "${q2_metric}/${NAME}_masked-aligned-rep-seqs.qza" \
+  --o-tree "${q2_metric}/${NAME}_unrooted-tree.qza" \
+  --o-rooted-tree "${q2_metric}/${NAME}_rooted-tree.qza"
 
-qiime metadata tabulate \
-  --m-input-file "${q2_dada2}/${NAME}_stats.qza" \
-  --o-visualization "${q2_dada2}/${NAME}_stats.qzv"
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny "${q2_metric}/${NAME}_rooted-tree.qza" \
+  --i-table "${q2_dada2}/${NAME}_asv-table.qza" \
+  --p-sampling-depth 2000 \
+  --m-metadata-file "${sourcedir}/${smetadata}" \
+  --output-dir "${q2_metric}/core-metrics-results"

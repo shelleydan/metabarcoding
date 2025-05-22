@@ -20,18 +20,14 @@ cat $0
 # Load some modules
 module load ${q2_module}
 
-qiime dada2 denoise-paired \
-  --i-demultiplexed-seqs "${q2_input}/${NAME}_demux.qza" \
-  --p-trim-left-f 20 \
-  --p-trunc-len-f 250 \
-  --p-trim-left-r 20 \
-  --p-trunc-len-r 250 \
-  --p-n-threads ${SLURM_CPUS_PER_TASK} \
-  --p-min-overlap 8 \
-  --o-representative-sequences "${q2_dada2}/${NAME}_asv-seqs.qza" \
-  --o-table "${q2_dada2}/${NAME}_asv-table.qza" \
-  --o-denoising-stats "${q2_dada2}/${NAME}_stats.qza"
+qiime feature-table tabulate-seqs \
+  --i-data "${q2_dada2}/${NAME}_asv-seqs.qza" \
+  --i-taxonomy "${q2_tax}/${NAME}-taxonomy.qza" \
+  --m-metadata-file "${sourcedir}/${smetadata}" \
+  --o-visualization "${q2_tax}/${NAME}-asv-seqs-ms2.qzv"
 
-qiime metadata tabulate \
-  --m-input-file "${q2_dada2}/${NAME}_stats.qza" \
-  --o-visualization "${q2_dada2}/${NAME}_stats.qzv"
+qiime taxa barplot \
+  --i-table "${q2_dada2}/${NAME}_asv-table.qza" \
+  --i-taxonomy "${q2_tax}/${NAME}-taxonomy.qza" \
+  --m-metadata-file "${sourcedir}/${smetadata}" \
+  --o-visualization "${q2_tax}/${NAME}-taxa-bar-plots.qzv"

@@ -86,7 +86,7 @@ module is-avail ${fastqc_module} || { echo "${fastqc_module} not avalible check 
 export fastqc_module
 export trimqc
 
-#STEP 3A: QIIME INPUT
+#STEP 4: QIIME INPUT and QC
 q2_input="${workdir}/q2_input"
 if [[ ! -d "${q2_input}" ]]; then
         mkdir -p "${q2_input}"
@@ -97,14 +97,33 @@ if [[ ! -d "${q2_dada2}" ]]; then
         mkdir -p "${q2_dada2}"
 fi
 
+q2_summary="${workdir}/q2_summary"
+if [[ ! -d "${q2_summary}" ]]; then
+        mkdir -p "${q2_summary}"
+fi
+
 q2_module="qiime2/2024.10-conda"
 module is-avail ${q2_module} || { echo "${q2_module} not avalible check config.parameters_all file" ; exit 1; }
 export q2_module
 export q2_input
 export q2_dada2
+export q2_summary
 
+#STEP 4: QIIME2 TAX
+q2_tax="${workdir}/q2_tax"
+if [[ ! -d "${q2_tax}" ]]; then
+        mkdir -p "${q2_tax}"
+fi
 
+export q2_tax
 
+#STEP 5: QIIME2 Metrics
+q2_metric="${workdir}/q2_metric"
+if [[ ! -d "${q2_metric}" ]]; then
+        mkdir -p "${q2_metric}"
+fi
+
+export q2_metric
 
 # STEP X:
 multiqcdir="${workdir}/multiqc"

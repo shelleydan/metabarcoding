@@ -66,8 +66,8 @@ while true; do
     -w|--work)  workdir="$2"; shift 2 ;;
     -p|--partition) PART="$2"; shift 2 ;;
     -m|--manifest) manifest="$2"; shift 2 ;;
-    -t|--smetadata) smetadata="$2"; shift 2 ;;
-    -r|--classifier) classifier="$2"; shift 2 ;;
+    -s|--smetadata) smetadata="$2"; shift 2 ;;
+    -c|--classifier) classifier="$2"; shift 2 ;;
     -h|--help) print_help ;;
     --) shift; break ;;
     *) echo "Unexpected option: $1" >&2; exit 1 ;;
@@ -120,9 +120,9 @@ fi
 echo "Run name (unique): ${NAME}"
 echo "Partition: ${PART}"
 echo "Working directory: ${workdir}"
-echo "Metadata file: ${metadata}"
-echo "Treatment for analysis: ${treatment}"
-echo "Reference condition: ${ref}"
+echo "Manifest file: ${manifest}"
+echo "Sample Metadata file: ${smetadata}"
+echo "Classifier: ${classifier}"
 
 #export arguements
 export NAME
