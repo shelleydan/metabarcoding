@@ -21,8 +21,8 @@ tail -n +2 ${sourcedir}/"${manifest}" | while IFS=$'\t' read -r sample read1 rea
 echo ${sample}
 echo ${read1}
 echo ${read2}
-#cp ${sourcedir}/${read1} ${rawdir}/${sample}_1.fastq.gz
-#cp ${sourcedir}/${read2} ${rawdir}/${sample}_2.fastq.gz
+#cp ${read1} ${rawdir}/${sample}_1.fastq.gz
+#cp ${read2} ${rawdir}/${sample}_2.fastq.gz
 
 done
 

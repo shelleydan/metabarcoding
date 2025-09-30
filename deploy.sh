@@ -47,11 +47,11 @@ fi
 # INPUT: sourcedir
 # WORK: q2_input, q2_dada2
 # OUTPUT: null
-#sbatch -d singleton --error="${log}/3A_q2input_%J.err" --output="${log}/3A_q2input_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/3A-qiime2-import.sh"
+sbatch -d singleton --error="${log}/3A_q2input_%J.err" --output="${log}/3A_q2input_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/3A-qiime2-import.sh"
 
-#sbatch -d singleton --error="${log}/3B_q2dada2_%J.err" --output="${log}/3B_q2dada2_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/3B-qiime2-dada2.sh"
+sbatch -d singleton --error="${log}/3B_q2dada2_%J.err" --output="${log}/3B_q2dada2_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/3B-qiime2-dada2.sh"
 
-#sbatch -d singleton --error="${log}/3C_q2sum_%J.err" --output="${log}/3C_q2sum_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/3C-qiime2-summary.sh"
+sbatch -d singleton --error="${log}/3C_q2sum_%J.err" --output="${log}/3C_q2sum_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/3C-qiime2-summary.sh"
 
 # Step 4: Qiime2 - Taxanomic Classification
 # Input into qiime and run QC.
@@ -59,9 +59,9 @@ fi
 # INPUT: sourcedir, smetadata, asv-seqs.qza, classifier
 # WORK: q2_dada2, q2_tax
 # OUTPUT: null
-#sbatch -d singleton --error="${log}/4A_q2tax_%J.err" --output="${log}/4A_q2tax_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/4A-qiime3-tax-annot.sh"
+sbatch -d singleton --error="${log}/4A_q2tax_%J.err" --output="${log}/4A_q2tax_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/4A-qiime3-tax-annot.sh"
 
-#sbatch -d singleton --error="${log}/4B_q2tax_%J.err" --output="${log}/4B_q2tax_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/4B-qiim2-tax-vis.sh"
+sbatch -d singleton --error="${log}/4B_q2tax_%J.err" --output="${log}/4B_q2tax_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/4B-qiim2-tax-vis.sh"
 
 # Step 5: Qiime2 - trees and metrics
 # Input into qiime - generates trees and metrics
@@ -69,7 +69,7 @@ fi
 # INPUT: sourcedir, smetadata, 
 # WORK: q2_input, q2_metric, q2_tax
 # OUTPUT: null
-#sbatch -d singleton --error="${log}/5A_q2metric_%J.err" --output="${log}/5A_q2metric_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/5A-qiim2-metrics.sh"
+sbatch -d singleton --error="${log}/5A_q2metric_%J.err" --output="${log}/5A_q2metric_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/5A-qiim2-metrics.sh"
 
 sbatch -d singleton --error="${log}/5B_q2alpha_%J.err" --output="${log}/5B_q2alpha_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/5B-qiime-alpha.sh"
 

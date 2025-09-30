@@ -24,6 +24,7 @@ qiime feature-table tabulate-seqs \
   --i-data "${q2_dada2}/${NAME}_asv-seqs.qza" \
   --i-taxonomy "${q2_tax}/${NAME}-taxonomy.qza" \
   --m-metadata-file "${sourcedir}/${smetadata}" \
+  --p-merge-method  union \
   --o-visualization "${q2_tax}/${NAME}-asv-seqs-ms2.qzv"
 
 qiime taxa barplot \

@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --nodes=1              # number of nodes to use
 #SBATCH --tasks-per-node=1     #
-#SBATCH --cpus-per-task=16      #
-#SBATCH --mem=64000     # in megabytes, unless unit explicitly stated
+#SBATCH --cpus-per-task=32      #
+#SBATCH --mem=128000     # in megabytes, unless unit explicitly stated
 
 echo "Some Usable Environment Variables:"
 echo "================================="
@@ -22,7 +22,7 @@ module load ${q2_module}
 
 qiime tools import \
      --type 'SampleData[PairedEndSequencesWithQuality]' \
-     --input-path ${sourcedir}/manifest.tsv \
+     --input-path ${sourcedir}/${manifest} \
      --input-format PairedEndFastqManifestPhred33V2 \
      --output-path "${q2_input}/${NAME}_demux.qza"
 
