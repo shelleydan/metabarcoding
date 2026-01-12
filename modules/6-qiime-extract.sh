@@ -39,3 +39,8 @@ qiime tools export \
         --input-path "${q2_metric}/${NAME}_rooted-tree.qza" \
         --output-path "${q2_extracted}"
 
+# Export the represented sequences
+qiime tools export \
+  --input-path "${q2_metric}/${NAME}_masked-aligned-rep-seqs.qza" \
+  --output-path "${q2_extracted}"
+
