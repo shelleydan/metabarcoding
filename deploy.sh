@@ -35,11 +35,11 @@ fi
 # INPUT: rawdir
 # WORK: qcdir
 # OUTPUT: null
-#sbatch -d singleton --error="${log}/2A-rawqc_%J.err" --output="${log}/2A-rawqc_%J.out" --array="0-${sample_number}%20" --job-name=${NAME} --partition=${PART} "${moduledir}/2A-fastqc_array.sh"
+sbatch -d singleton --error="${log}/2A-rawqc_%J.err" --output="${log}/2A-rawqc_%J.out" --array="0-${sample_number}%20" --job-name=${NAME} --partition=${PART} "${moduledir}/2A-fastqc_array.sh"
 
-#sbatch -d singleton --error="${log}/2B-fastp_%J.err" --output="${log}/2B-fastp_%J.out" --"array=0-${sample_number}%20" --job-name=${NAME} --partition=${PART} "${moduledir}/2B-fastp_array.sh"  
+sbatch -d singleton --error="${log}/2B-fastp_%J.err" --output="${log}/2B-fastp_%J.out" --"array=0-${sample_number}%20" --job-name=${NAME} --partition=${PART} "${moduledir}/2B-fastp_array.sh"  
 
-#sbatch -d singleton --error="${log}/2C-trimqc_%J.err" --output="${log}/2C-trimqc_%J.out" --array="0-${sample_number}%20" --job-name=${NAME} --partition=${PART} "${moduledir}/2C-fastqc-trim.sh"
+sbatch -d singleton --error="${log}/2C-trimqc_%J.err" --output="${log}/2C-trimqc_%J.out" --array="0-${sample_number}%20" --job-name=${NAME} --partition=${PART} "${moduledir}/2C-fastqc-trim.sh"
 
 # Step 3: Qiime2 - import, QC
 # Input into qiime and run QC.
@@ -70,8 +70,15 @@ sbatch -d singleton --error="${log}/4B_q2tax_%J.err" --output="${log}/4B_q2tax_%
 # WORK: q2_input, q2_metric, q2_tax
 # OUTPUT: null
 sbatch -d singleton --error="${log}/5A_q2metric_%J.err" --output="${log}/5A_q2metric_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/5A-qiim2-metrics.sh"
-
 sbatch -d singleton --error="${log}/5B_q2alpha_%J.err" --output="${log}/5B_q2alpha_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/5B-qiime-alpha.sh"
+
+# Step 6: Qiime2 - Extarct Data for R Analysis
+# -- Process of extracting the rooted tree, feature ASV table and taxonomy table for further analysis in R.
+# CORE PARAMETERS: modules, workdir
+# INPUT: workdir
+# WORK: q2_metric, q2_dada2, q2_tax
+# OUTPUT: q2_extracted
+sbatch -d singleton --error="${log}/6_q2extraction_%J.err" --output="${log}/6_q2extraction_%J.out" --job-name=${NAME} --partition=${PART} "${moduledir}/6-qiime-extract.sh"
 
 # Step X: MultiQC report
 # -- Generate a MultiQC report to summarize the results of all previous steps.
