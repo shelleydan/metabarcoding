@@ -61,7 +61,7 @@ qcdir="${workdir}/rawqc"
 if [[ ! -d "${qcdir}" ]]; then 
 	mkdir -p "${qcdir}" 
 fi
-fastqc_module="fastqc/v0.11.9"
+fastqc_module="fastqc/0.12.1-luqvhcm"
 module is-avail ${fastqc_module} || { echo "${fastqc_module} not avalible check config.parameters_all file" ; exit 1; }
 export fastqc_module
 export qcdir
@@ -71,7 +71,7 @@ trimdir="${workdir}/trim_files"
 if [[ ! -d "${trimdir}" ]]; then
         mkdir -p "${trimdir}"
 fi
-fastp_module="fastp/v0.20"
+fastp_module="fastp/0.23.4-mr6qifo"
 module is-avail ${fastp_module} || { echo "${fastp_module} not avalible check config.parameters_all file" ; exit 1; }
 export fastp_module
 export trimdir
@@ -124,6 +124,15 @@ if [[ ! -d "${q2_metric}" ]]; then
 fi
 
 export q2_metric
+
+#STEP 6: EXPORTING DATA
+
+q2_extracted="${workdir}/q2_extracted"
+if [[ ! -d "${q2_extracted}" ]]; then
+        mkdir -p "${q2_extracted}"
+fi
+
+export q2_extracted
 
 # STEP X:
 multiqcdir="${workdir}/multiqc"
